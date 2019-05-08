@@ -12,8 +12,6 @@ from morph_net.framework import op_handlers
 from morph_net.framework import op_regularizer_manager as orm
 from morph_net.network_regularizers import cost_calculator
 from morph_net.network_regularizers import resource_function
-import tensorflow as tf
-from typing import Type, List
 
 
 class GammaLatencyRegularizer(generic_regularizers.NetworkRegularizer):
@@ -25,11 +23,11 @@ class GammaLatencyRegularizer(generic_regularizers.NetworkRegularizer):
       gamma_threshold,
       hardware,
       batch_size=1,
-      regularizer_decorator: Type[generic_regularizers.OpRegularizer] = None,
+      regularizer_decorator=None,
       decorator_parameters=None,
       input_boundary: List[tf.Operation] = None,
       force_group=None,
-      regularizer_blacklist=None) -> None:
+      regularizer_blacklist=None):
     """Creates a GammaLatencyRegularizer object.
 
     Latency cost and regularization loss is calculated for a specified hardware

@@ -15,12 +15,10 @@ import os
 from morph_net.framework import op_regularizer_manager as orm
 import numpy as np
 import tensorflow as tf
-from typing import Text, Sequence, Dict, Optional, IO, Iterable, Callable
 
 _SUPPORTED_OPS = ['Conv2D', 'Conv2DBackpropInput']
 _ALIVE_FILENAME = 'alive'
 _REG_FILENAME = 'regularization'
-
 
 class StructureExporter(object):
   """Reports statistics about the current state of regularization.
@@ -44,8 +42,8 @@ class StructureExporter(object):
   """
 
   def __init__(self,
-               op_regularizer_manager: orm.OpRegularizerManager,
-               remove_common_prefix: bool = False) -> None:
+               op_regularizer_manager,
+               remove_common_prefix):
     """Build a StructureExporter object.
 
     Args:
@@ -103,7 +101,7 @@ class StructureExporter(object):
           % (sorted(values), sorted(self.tensors)))
     self._alive_vectors = values
 
-  def get_alive_counts(self) -> Dict[Text, int]:
+  def get_alive_counts(self):
     """Computes alive counts.
 
     populate_tensor_values() must have been called earlier.
@@ -119,7 +117,7 @@ class StructureExporter(object):
       raise RuntimeError('Tensor values not populated.')
     return _compute_alive_counts(self._alive_vectors)
 
-  def save_alive_counts(self, f: IO[bytes]) -> None:
+  def save_alive_counts(self, f):
     """Saves live counts to a file.
 
     Args:

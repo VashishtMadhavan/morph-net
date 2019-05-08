@@ -15,9 +15,6 @@ from morph_net.framework import op_handlers
 from morph_net.framework import op_regularizer_manager as orm
 from morph_net.network_regularizers import cost_calculator
 from morph_net.network_regularizers import resource_function
-import tensorflow as tf
-from typing import Text, Type, List
-
 
 class GammaModelSizeRegularizer(generic_regularizers.NetworkRegularizer):
   """A NetworkRegularizer that targets model size using Gamma L1."""
@@ -26,7 +23,7 @@ class GammaModelSizeRegularizer(generic_regularizers.NetworkRegularizer):
       self,
       output_boundary: List[tf.Operation],
       gamma_threshold,
-      regularizer_decorator: Type[generic_regularizers.OpRegularizer] = None,
+      regularizer_decorator=None,
       decorator_parameters=None,
       input_boundary: List[tf.Operation] = None,
       force_group=None,
