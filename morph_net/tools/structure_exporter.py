@@ -43,7 +43,7 @@ class StructureExporter(object):
 
   def __init__(self,
                op_regularizer_manager,
-               remove_common_prefix):
+               remove_common_prefix=False):
     """Build a StructureExporter object.
 
     Args:
