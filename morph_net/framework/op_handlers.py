@@ -41,6 +41,14 @@ def _get_base_op_hander_dicts():
               leaf_op_handler.LeafOpHandler(),
           'Transpose':
               output_non_passthrough_op_handler.OutputNonPassthroughOpHandler(),
+          'ScatterNd':
+              output_non_passthrough_op_handler.OutputNonPassthroughOpHandler(),
+          'GatherNd':
+              output_non_passthrough_op_handler.OutputNonPassthroughOpHandler(),
+          'Select':
+              output_non_passthrough_op_handler.OutputNonPassthroughOpHandler(),
+          'Fill':
+              output_non_passthrough_op_handler.OutputNonPassthroughOpHandler(),
       })
 
 
