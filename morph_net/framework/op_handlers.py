@@ -33,6 +33,8 @@ def _get_base_op_hander_dicts():
               leaf_op_handler.LeafOpHandler(),
           'SpaceToDepth':
               leaf_op_handler.LeafOpHandler(),
+          'Squeeze':
+              leaf_op_handler.LeafOpHandler(),
           'StridedSlice':
               leaf_op_handler.LeafOpHandler(),
           'TensorArrayGatherV3':
