@@ -13,6 +13,7 @@ from morph_net.framework import op_handler_util
 def _get_concat_op_axis(op):
   return op.inputs[-1].op.get_attr('value').int_val[0]
 
+
 class ConcatOpHandler(op_handler.OpHandler):
   """OpHandler implementation for concat operations."""
 
