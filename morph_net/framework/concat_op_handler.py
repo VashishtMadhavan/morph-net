@@ -8,12 +8,10 @@ from morph_net.framework import grouping_op_handler
 from morph_net.framework import op_handler
 from morph_net.framework import op_handler_util
 
-
 # The axis arg of tf.concat is a constant tensor stored in the last element of
 # op.inputs. This function access the value of that tensor.
 def _get_concat_op_axis(op):
   return op.inputs[-1].op.get_attr('value').int_val[0]
-
 
 class ConcatOpHandler(op_handler.OpHandler):
   """OpHandler implementation for concat operations."""
