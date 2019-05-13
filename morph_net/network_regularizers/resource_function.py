@@ -30,6 +30,7 @@ PEAK_COMPUTE = {  # GFLOP/s
     'K80': 8740,
     'P4': 5500,
     'T4': 8100,
+    '1080ti': 10600,
     'P100': 9300,
     'V100': 125000,
     'TPUv2': 22500,
@@ -40,6 +41,7 @@ MEMORY_BANDWIDTH = {  # GB/s
     'K80': 480,
     'P4': 192,
     'T4': 300,
+    '1080ti': 484,
     'P100': 732,
     'V100': 900,
     'TPUv2': 300,
@@ -241,23 +243,23 @@ def memory_function(op, is_regularization, num_alive_inputs, num_alive_outputs,
   bilinear_payloads = []
   if is_regularization:
     for input_payload in normalized_input_payloads:
-      input_payloads.append(input_payload * batch_size * reg_inputs)
+      input_payloads.append(tf.cast(input_payload, tf.float32) * batch_size * reg_inputs)
     for output_payload in normalized_output_payloads:
-      output_payloads.append(output_payload * batch_size * reg_outputs)
+      output_payloads.append(tf.cast(output_payload, tf.float32) * batch_size * reg_outputs)
     for bilinear_payload in normalized_bilinear_payloads:
       bilinear_payloads.append(
-          bilinear_payload * (
+          tf.cast(bilinear_payload, tf.float32) * (
               num_alive_inputs * reg_outputs + num_alive_outputs * reg_inputs))
   else:
     for input_payload in normalized_input_payloads:
       input_payloads.append(
-          input_payload * batch_size * num_alive_inputs)
+          tf.cast(input_payload, tf.float32) * batch_size * num_alive_inputs)
     for output_payload in normalized_output_payloads:
       output_payloads.append(
-          output_payload * batch_size * num_alive_outputs)
+          tf.cast(output_payload, tf.float32) * batch_size * num_alive_outputs)
     for bilinear_payload in normalized_bilinear_payloads:
       bilinear_payloads.append(
-          bilinear_payload * num_alive_inputs * num_alive_outputs)
+          tf.cast(bilinear_payload, tf.float32) * num_alive_inputs * num_alive_outputs)
 
   return tf.reduce_sum(input_payloads + output_payloads + bilinear_payloads)
 
