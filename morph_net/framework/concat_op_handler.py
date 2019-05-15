@@ -14,6 +14,12 @@ def _get_concat_op_axis(op):
   return op.inputs[-1].op.get_attr('value').int_val[0]
 
 
+# The axis arg of tf.concat is a constant tensor stored in the last element of
+# op.inputs. This function access the value of that tensor.
+def _get_concat_op_axis(op):
+  return op.inputs[-1].op.get_attr('value').int_val[0]
+
+
 class ConcatOpHandler(op_handler.OpHandler):
   """OpHandler implementation for concat operations."""
 
@@ -41,6 +47,7 @@ class ConcatOpHandler(op_handler.OpHandler):
       handler = grouping_op_handler.GroupingOpHandler()
       handler.assign_grouping(op, op_reg_manager)
       return
+
 
     # TODO(a1): Consider refactoring this duplicated logic.
     # Check if all input ops have groups, or tell the manager to process them.
