@@ -25,7 +25,7 @@ class GammaModelSizeRegularizer(generic_regularizers.NetworkRegularizer):
       gamma_threshold,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary: List[tf.Operation] = None,
+      input_boundary=None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GammaModelSizeRegularizer object.

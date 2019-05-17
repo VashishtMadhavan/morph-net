@@ -26,7 +26,7 @@ class GammaFlopsRegularizer(generic_regularizers.NetworkRegularizer):
       gamma_threshold,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary: List[tf.Operation] = None,
+      input_boundary=None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GammaFlopsRegularizer object.
@@ -34,7 +34,7 @@ class GammaFlopsRegularizer(generic_regularizers.NetworkRegularizer):
     Args:
       output_boundary: An OpRegularizer will be created for all these
         operations, and recursively for all ops they depend on via data
-        dependency that does not involve ops from input_boundary.
+        dependency that does not involve ops from input_boundary
       gamma_threshold: A float scalar, will be used as a 'gamma_threshold' for
         all instances GammaL1Regularizer created by this class.
       regularizer_decorator: A class of OpRegularizer decorator to use.
@@ -99,7 +99,7 @@ class GroupLassoFlopsRegularizer(generic_regularizers.NetworkRegularizer):
       l1_fraction=0,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary: List[tf.Operation] = None,
+      input_boundary=None,
       force_group=None,
       regularizer_blacklist=None,
       convert_to_variable=True):
