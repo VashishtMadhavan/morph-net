@@ -34,7 +34,7 @@ class GammaFlopsRegularizer(generic_regularizers.NetworkRegularizer):
     Args:
       output_boundary: An OpRegularizer will be created for all these
         operations, and recursively for all ops they depend on via data
-        dependency that does not involve ops from input_boundary.
+        dependency that does not involve ops from input_boundary
       gamma_threshold: A float scalar, will be used as a 'gamma_threshold' for
         all instances GammaL1Regularizer created by this class.
       regularizer_decorator: A class of OpRegularizer decorator to use.
