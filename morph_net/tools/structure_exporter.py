@@ -84,7 +84,6 @@ class StructureExporter(object):
 
   def populate_tensor_values(self, values: Dict[Text, Sequence[bool]]) -> None:
     """Records alive values for ops regularized by op_regularizer_manager.
-
     The given mapping must match op names from `self.tensor`.
 
     Args:
@@ -124,8 +123,9 @@ class StructureExporter(object):
     """
     f.write(format_structure(self.get_alive_counts()))
 
-  def create_file_and_save_alive_counts(self, base_dir: Text,
-                                        global_step: int) -> None:
+
+  def create_file_and_save_alive_counts(self, base_dir,
+                                        global_step):
     """Creates and updates files with alive counts.
 
     Creates the directory `{base_dir}/learned_structure/` and saves the current
@@ -153,8 +153,8 @@ class StructureExporter(object):
 
 # TODO(p1): maybe check that we still end up with unique names after prefix
 # removal, and do nothing if that's not the case?
-def get_remove_common_prefix_fn(iterable: Iterable[Text]
-                               ) -> Callable[[Text], Text]:
+
+def get_remove_common_prefix_fn(iterable):
   """Obtains a function that removes common prefix.
 
   Determines if all items in iterable start with the same substring (up to and
