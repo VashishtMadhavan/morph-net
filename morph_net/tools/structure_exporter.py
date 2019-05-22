@@ -4,7 +4,6 @@ When training with a network regularizer, the emerging structure of the
 network is encoded in the `alive_vector`s and `regularization_vector`s of the
 `OpRegularizerManager`.
 """
-
 from __future__ import absolute_import
 from __future__ import division
 # [internal] enable type annotations
