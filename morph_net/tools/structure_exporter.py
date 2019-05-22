@@ -82,7 +82,8 @@ class StructureExporter(object):
     # TODO(p1): Rename tensors to something better. tensors is a dict!
     return self._tensors
 
-  def populate_tensor_values(self, values: Dict[Text, Sequence[bool]]) -> None:
+
+  def populate_tensor_values(self, values):
     """Records alive values for ops regularized by op_regularizer_manager.
     The given mapping must match op names from `self.tensor`.
 
@@ -153,7 +154,6 @@ class StructureExporter(object):
 
 # TODO(p1): maybe check that we still end up with unique names after prefix
 # removal, and do nothing if that's not the case?
-
 def get_remove_common_prefix_fn(iterable):
   """Obtains a function that removes common prefix.
 
