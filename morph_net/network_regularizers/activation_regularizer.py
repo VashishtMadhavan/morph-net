@@ -25,7 +25,7 @@ class GammaActivationRegularizer(generic_regularizers.NetworkRegularizer):
       gamma_threshold,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary=None,
+      input_boundary: List[tf.Operation] = None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GammaActivationRegularizer object.
@@ -98,7 +98,7 @@ class GroupLassoActivationRegularizer(generic_regularizers.NetworkRegularizer):
       l1_fraction=0,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary=None,
+      input_boundary: List[tf.Operation] = None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GroupLassoActivationRegularizer object.

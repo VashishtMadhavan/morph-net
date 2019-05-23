@@ -25,7 +25,7 @@ class GammaLatencyRegularizer(generic_regularizers.NetworkRegularizer):
       batch_size=1,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary=None,
+      input_boundary: List[tf.Operation] = None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GammaLatencyRegularizer object.
