@@ -19,13 +19,13 @@ class GammaLatencyRegularizer(generic_regularizers.NetworkRegularizer):
 
   def __init__(
       self,
-      ops,
+      output_boundary: List[tf.Operation],
       gamma_threshold,
       hardware,
       batch_size=1,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary=None,
+      input_boundary: List[tf.Operation] = None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GammaLatencyRegularizer object.
@@ -34,10 +34,9 @@ class GammaLatencyRegularizer(generic_regularizers.NetworkRegularizer):
     platform.
 
     Args:
-      ops: A list of tf.Operation. An OpRegularizer will be created for all
-        the ops in `ops`, and recursively for all ops they depend on via data
-        dependency. Typically `ops` would contain a single tf.Operation, which
-        is the output of the network.
+      output_boundary: An OpRegularizer will be created for all these
+        operations, and recursively for all ops they depend on via data
+        dependency that does not involve ops from input_boundary.
       gamma_threshold: A float scalar, will be used as a 'gamma_threshold' for
         all instances GammaL1Regularizer created by this class.
       hardware: String name of hardware platform to target.  Must be a key from
@@ -71,7 +70,7 @@ class GammaLatencyRegularizer(generic_regularizers.NetworkRegularizer):
     })
 
     self._manager = orm.OpRegularizerManager(
-        ops, op_handler_dict, input_boundary=input_boundary,
+        output_boundary, op_handler_dict, input_boundary=input_boundary,
         force_group=force_group, regularizer_blacklist=regularizer_blacklist)
     self._calculator = cost_calculator.CostCalculator(
         self._manager,
