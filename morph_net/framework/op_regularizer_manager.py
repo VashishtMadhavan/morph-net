@@ -50,7 +50,7 @@ class OpRegularizerManager(object):
       create_grouping_regularizer=grouping_regularizers.MaxGroupingRegularizer,
       force_group=None,
       regularizer_blacklist=None,
-      input_boundary=None,
+      input_boundary: List[tf.Operation] = None,
       iteration_limit=ITERATION_LIMIT):
     """Creates an instance of OpRegularizerManager.
 
