@@ -26,7 +26,7 @@ class GammaFlopsRegularizer(generic_regularizers.NetworkRegularizer):
       gamma_threshold,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary: List[tf.Operation] = None,
+      input_boundary=None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GammaFlopsRegularizer object.
@@ -34,11 +34,11 @@ class GammaFlopsRegularizer(generic_regularizers.NetworkRegularizer):
     Args:
       output_boundary: An OpRegularizer will be created for all these
         operations, and recursively for all ops they depend on via data
-<<<<<<< HEAD
         dependency that does not involve ops from input_boundary
-=======
-        dependency that does not involve ops from input_boundary.
->>>>>>> Change regularizer ctor signature: rename `ops` --> `output_boundary`.
+      ops: A list of tf.Operation. An OpRegularizer will be created for all the
+        ops in `ops`, and recursively for all ops they depend on via data
+        dependency that does not involve input ops. Typically `ops` would
+        contain a single tf.Operation, which is the output of the network.
       gamma_threshold: A float scalar, will be used as a 'gamma_threshold' for
         all instances GammaL1Regularizer created by this class.
       regularizer_decorator: A class of OpRegularizer decorator to use.
@@ -67,7 +67,7 @@ class GammaFlopsRegularizer(generic_regularizers.NetworkRegularizer):
     })
 
     self._manager = orm.OpRegularizerManager(
-        output_boundary,
+        ops,
         op_handler_dict,
         input_boundary=input_boundary,
         force_group=force_group,
@@ -104,15 +104,16 @@ class GroupLassoFlopsRegularizer(generic_regularizers.NetworkRegularizer):
       l1_fraction=0,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary: List[tf.Operation] = None,
+      input_boundary=None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GroupLassoFlopsRegularizer object.
 
     Args:
-      output_boundary: An OpRegularizer will be created for all these
-        operations, and recursively for all ops they depend on via data
-        dependency that does not involve ops from input_boundary.
+      ops: A list of tf.Operation. An OpRegularizer will be created for all the
+        ops in `ops`, and recursively for all ops they depend on via data
+        dependency. Typically `ops` would contain a single tf.Operation, which
+        is the output of the network.
       threshold: A float scalar, will be used as a 'threshold' for all
         regularizer instances created by this class.
       l1_fraction: Relative weight of L1 in L1 + L2 regularization.
@@ -152,7 +153,7 @@ class GroupLassoFlopsRegularizer(generic_regularizers.NetworkRegularizer):
     })
 
     self._manager = orm.OpRegularizerManager(
-        output_boundary,
+        ops,
         op_handler_dict,
         input_boundary=input_boundary,
         force_group=force_group,
