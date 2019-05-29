@@ -21,11 +21,11 @@ class GammaModelSizeRegularizer(generic_regularizers.NetworkRegularizer):
 
   def __init__(
       self,
-      output_boundary: List[tf.Operation],
+      output_boundary,
       gamma_threshold,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary: List[tf.Operation] = None,
+      input_boundary=None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GammaModelSizeRegularizer object.
@@ -92,14 +92,14 @@ class GroupLassoModelSizeRegularizer(generic_regularizers.NetworkRegularizer):
 
   def __init__(
       self,
-      output_boundary: List[tf.Operation],
+      output_boundary,
       threshold,
       l1_fraction=0.0,
-      regularizer_decorator: Type[generic_regularizers.OpRegularizer] = None,
+      regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary: List[tf.Operation] = None,
-      force_group: List[Text] = None,
-      regularizer_blacklist: List[Text] = None,
+      input_boundary=None,
+      force_group=None,
+      regularizer_blacklist=None,
       convert_to_variable=True):
     """Creates a GroupLassoModelSizeRegularizer object.
 

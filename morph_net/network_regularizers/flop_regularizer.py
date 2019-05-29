@@ -22,11 +22,11 @@ class GammaFlopsRegularizer(generic_regularizers.NetworkRegularizer):
 
   def __init__(
       self,
-      output_boundary: List[tf.Operation],
+      output_boundary,
       gamma_threshold,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary: List[tf.Operation] = None,
+      input_boundary=None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GammaFlopsRegularizer object.
@@ -94,12 +94,12 @@ class GroupLassoFlopsRegularizer(generic_regularizers.NetworkRegularizer):
 
   def __init__(
       self,
-      output_boundary: List[tf.Operation],
+      output_boundary,
       threshold,
       l1_fraction=0,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary: List[tf.Operation] = None,
+      input_boundary=None,
       force_group=None,
       regularizer_blacklist=None,
       convert_to_variable=True):

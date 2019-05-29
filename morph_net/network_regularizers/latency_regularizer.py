@@ -19,13 +19,13 @@ class GammaLatencyRegularizer(generic_regularizers.NetworkRegularizer):
 
   def __init__(
       self,
-      output_boundary: List[tf.Operation],
+      output_boundary,
       gamma_threshold,
       hardware,
       batch_size=1,
       regularizer_decorator=None,
       decorator_parameters=None,
-      input_boundary: List[tf.Operation] = None,
+      input_boundary=None,
       force_group=None,
       regularizer_blacklist=None):
     """Creates a GammaLatencyRegularizer object.

@@ -181,7 +181,7 @@ def get_remove_common_prefix_fn(iterable):
 
 
 def _compute_alive_counts(
-    alive_vectors: Dict[Text, Sequence[bool]]) -> Dict[Text, int]:
+    alive_vectors):
   """Computes alive counts.
 
   Args:
