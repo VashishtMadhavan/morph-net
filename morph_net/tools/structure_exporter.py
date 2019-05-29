@@ -197,5 +197,5 @@ def _compute_alive_counts(
   }
 
 
-def format_structure(structure: Dict[Text, int]) -> Text:
+def format_structure(structure):
   return json.dumps(structure, indent=2, sort_keys=True, default=str)
