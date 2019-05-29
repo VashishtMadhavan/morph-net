@@ -13,8 +13,6 @@ from morph_net.framework import grouping_regularizers
 from morph_net.framework import op_handler_util
 import tensorflow as tf
 
-from typing import List
-
 # Hardcoded limit for OpRegularizerManager to finish analyzing the network.
 ITERATION_LIMIT = 1000000
 
@@ -52,7 +50,7 @@ class OpRegularizerManager(object):
       create_grouping_regularizer=grouping_regularizers.MaxGroupingRegularizer,
       force_group=None,
       regularizer_blacklist=None,
-      input_boundary: List[tf.Operation] = None,
+      input_boundary=None,
       iteration_limit=ITERATION_LIMIT):
     """Creates an instance of OpRegularizerManager.
 
