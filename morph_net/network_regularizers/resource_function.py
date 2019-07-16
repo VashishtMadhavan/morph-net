@@ -473,12 +473,9 @@ def _calculate_bilinear_regularization(
     # second term is used.
     # TODO(b1): revisit this expression after experiments.
     return batch_size * coeff * (reg_inputs + reg_outputs)
-  elif reg_inputs.op.type == 'Const':
-    return batch_size * coeff * (num_alive_inputs * reg_outputs)
-  else:
-    # Handle normal ops.
-    return batch_size * coeff * (
-        num_alive_inputs * reg_outputs + num_alive_outputs * reg_inputs)
+  # Handle normal ops.
+  return batch_size * coeff * (
+      num_alive_inputs * reg_outputs + num_alive_outputs * reg_inputs)
 
 
 def _calculate_bilinear_cost(
