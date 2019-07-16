@@ -70,8 +70,6 @@ def flop_coeff(op):
   Raises:
     ValueError: conv_op is not a supported tf.Operation.
   """
-  if not is_flop_op(op):
-    return 0.0
   if op.type == 'MatMul':
     # A MatMul is like a 1x1 conv with an output size of 1x1, so from the factor
     # below only the 2.0 remains.
@@ -149,6 +147,8 @@ def flop_function(op, is_regularization, num_alive_inputs, num_alive_outputs,
   Returns:
     Tensor with the cost or regularization loss of the op in terms of FLOPs.
   """
+  if not is_flop_op(op):
+    return 0.0
   coeff = flop_coeff(op)
   if is_regularization:
     return _calculate_bilinear_regularization(
@@ -473,6 +473,8 @@ def _calculate_bilinear_regularization(
     # second term is used.
     # TODO(b1): revisit this expression after experiments.
     return batch_size * coeff * (reg_inputs + reg_outputs)
+  elif reg_inputs.op.type == 'Const':
+    return batch_size * coeff * (num_alive_inputs * reg_outputs)
   else:
     # Handle normal ops.
     return batch_size * coeff * (
