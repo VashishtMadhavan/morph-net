@@ -55,7 +55,7 @@ class CostCalculator(object):
     Returns:
       Cost or regularization term for ops as a tensor or float.
     """
-    total = 0.0
+    total = []
     if not ops:
       ops = self._manager.ops
     for op in ops:
@@ -77,15 +77,17 @@ class CostCalculator(object):
       reg_inputs = _sum_of_reg_vector(input_op_reg)
       reg_outputs = _sum_of_reg_vector(output_op_reg)
 
-      total += self._resource_function(
+      res_cost = self._resource_function(
           op, is_regularization, num_alive_inputs, num_alive_outputs,
           reg_inputs, reg_outputs)
+      if res_cost != 0:
+        total.append(res_cost)
 
     # If at least one supported op is present, type would be tensor, not float.
     if isinstance(total, float):
       # Tests rely on this function not raising exception in this case.
       tf.logging.warning('No supported ops found.')
-    return total
+    return tf.add_n(res_cost)
 
   def get_cost(self, ops=None):
     """Returns cost for ops.
