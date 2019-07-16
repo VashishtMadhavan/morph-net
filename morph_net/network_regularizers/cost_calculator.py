@@ -87,7 +87,7 @@ class CostCalculator(object):
     if isinstance(total, float):
       # Tests rely on this function not raising exception in this case.
       tf.logging.warning('No supported ops found.')
-    return tf.add_n(res_cost)
+    return tf.add_n(total)
 
   def get_cost(self, ops=None):
     """Returns cost for ops.
