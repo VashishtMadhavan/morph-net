@@ -201,6 +201,11 @@ with tf.Session() as sess:
       exporter.populate_tensor_values(structure_exporter_tensors)
       exporter.create_file_and_save_alive_counts(train_dir, step)
 ```
+### Training Examples
+
+Some examples of training a network with MorphNet are provided in the `morph_net/examples/` folder.
+The examples go over training a network normally and in a distributed fashion via [Horovod](https://github.com/horovod/horovod).
+
 
 ## Misc
 
